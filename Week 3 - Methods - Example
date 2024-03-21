@@ -1,0 +1,67 @@
+
+print("Calculator")
+input_value1 = input("First Number : ")
+input_operator = input("Choose (plus, minus, mulitiply, divide) : ")
+input_value2 = input("Second Number: ")
+
+
+def is_numeric(value):
+	try:
+		float(value)
+		return True
+	except ValueError:
+		return False
+
+
+def identify_operator(x):
+    operator_upper = x.upper()
+    valid_operator = False
+    chosen_operator = None
+
+    if (operator_upper == "ADD") or (operator_upper == "+") or (operator_upper == "PLUS"):
+        valid_operator = True
+        chosen_operator = "+"
+    elif (operator_upper == "MINUS") or (operator_upper == "-") or (operator_upper == "SUBTRACT"):
+        valid_operator = True
+        chosen_operator = "-"
+    elif (operator_upper == "MULTIPLY") or (operator_upper == "X") or (operator_upper == "*"):
+        valid_operator = True
+        chosen_operator = "*"
+    elif (operator_upper == "DIVIDE") or (operator_upper == "/") or (operator_upper == "÷"):
+        valid_operator = True
+        chosen_operator = "/"
+
+    return valid_operator, chosen_operator
+
+valid_input_values = False
+if (is_numeric(input_value1)) and (is_numeric(input_value2)):
+    valid_input_values = True
+else:
+    valid_input_values = False
+    print("Invalid input for values. It must be a number.")
+
+
+def calculator(value1, chosen_operator, value2):
+
+    chosen_operator = identify_operator(input_operator)[1]
+    value1 = float(value1)
+    value2 = float(value2)
+    if chosen_operator == '+':
+          answer = value1 + value2
+    elif chosen_operator == '-':
+          answer = value1 - value2
+    elif chosen_operator == '*':
+          answer = value1 * value2
+    elif chosen_operator == '/':
+          answer = value1 / value2
+    
+    return answer
+
+
+if valid_input_values and identify_operator(input_operator)[0]:
+    output = calculator(input_value1, input_operator, input_value2)
+    print(output)
+elif valid_input_values and identify_operator(input_operator)[0] == False:
+    print("Chosen operator is not listed (plus, minus, mulitiply, divide)")
+
+
